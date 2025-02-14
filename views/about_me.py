@@ -1,11 +1,30 @@
 import streamlit as st
 
+
+# -----------intiliazing content----------
+name = "Anuj Kumar"
+description = "Senior RPA AI Developer at IQVIA | Automation Anywhere Developer | Power Apps | Power Automate Developer | Azure AI"
+email = "anuj89822@gmail.com"
+mobileNo="+91 8982280835"
+
+social_media = {
+    "YouTube": "https://www.youtube.com/channel/UCDKIlFseCDdfXhNQ4linbEg",
+    "LinkedIn":"https://www.linkedin.com/in/anuj-kumar-rpa/",
+}
+# ------Reading files -------
+with open("./assets/resume_anuj_RPA.pdf", "rb") as pdf_file:
+    PDFByte = pdf_file.read()
+
+with open("./styles/main.css") as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+
 # --------------Creating Dialog-----
 @st.dialog("Contact Me")
 def contact_form():
-    st.html("<b>Mail ID:</b> 📧 anuj89822@gmail.com")
-    st.html("<b>Mobile Number:</b> 📞+91 8982280835")
+    st.html(f"<b>Mail ID:</b> 📧 {email}")
+    st.html(f"<b>Mobile Number:</b> 📞 {mobileNo}")
     st.html("<b>Linkdin Profile:</b> <a href = 'https://www.linkedin.com/in/anuj-kumar-rpa/'> 🧑Click Me</a>")
+
 # -------Hero section----
 
 col1, col2 = st.columns(2, gap="small", vertical_alignment="center")
@@ -13,13 +32,23 @@ col1, col2 = st.columns(2, gap="small", vertical_alignment="center")
 with col1:
     st.image("./assets/my_pic2.png", width=230)
 with col2:
-    st.title("Anuj Kumar", anchor=False)
-    st.write(
-        "Senior RPA AI Developer | Automation Anywhere | Power Apps | Power Automate"
+    st.title(name, anchor=False)
+    st.write(description)
+    st.download_button(
+        label = " 📃 Download Resume",
+        data = PDFByte,
+        file_name = "resume_anuj_RPA_AI.pdf",
+        mime="application/octet-stream"
     )
     if st.button("✉ Contact Me"):
         contact_form()
-    
+
+# -----------Social Media -------
+st.write("#")
+cols = st.columns(len(social_media))
+
+for index, (platform, link) in enumerate(social_media.items()):
+    cols[index].write(f"[{platform}]({link})")
 
 # ------All the user details --------
 st.write("\n")
