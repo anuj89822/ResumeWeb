@@ -20,7 +20,6 @@ with open("./styles/main.css") as f:
 
 # --------------Creating Dialog-----
 @st.dialog("Contact Me")
-# @st.experimental_dialog("Contact Me")
 def contact_form():
     st.html(f"<b>Mail ID:</b> 📧 {email}")
     st.html(f"<b>Mobile Number:</b> 📞 {mobileNo}")
